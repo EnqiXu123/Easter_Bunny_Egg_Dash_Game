@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bunny Egg Dash</title>
+    <meta
+      name="description"
+      content="Catch the good eggs, dodge the bad ones, and chase your best score in Bunny Egg Dash."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="sky-glow sky-glow-left" aria-hidden="true"></div>
+      <div class="sky-glow sky-glow-right" aria-hidden="true"></div>
+      <div class="floating-egg floating-egg-one" aria-hidden="true"></div>
+      <div class="floating-egg floating-egg-two" aria-hidden="true"></div>
+
+      <main id="app" class="app">
+        <section id="home-screen" class="screen">
+          <div class="card hero-card">
+            <div class="hero-copy">
+              <p class="eyebrow">Spring garden arcade</p>
+              <h1>Bunny Egg Dash</h1>
+              <p class="hero-text">
+                Catch the good eggs, dodge the bad ones, and become an Easter legend.
+              </p>
+
+              <div class="hero-actions">
+                <button id="play-btn" class="button button-primary">Play Now</button>
+                <button id="how-to-play-btn" class="button button-secondary">How to Play</button>
+              </div>
+
+              <div class="home-meta">
+                <div class="pill">
+                  <span class="pill-label">Best Score</span>
+                  <strong id="home-best-score">0</strong>
+                </div>
+                <button id="sound-toggle-btn" class="pill pill-button" type="button" aria-pressed="true">
+                  Sound: <span id="sound-toggle-label">On</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+              <div class="hero-bunny">
+                <span class="bunny-ear bunny-ear-left"></span>
+                <span class="bunny-ear bunny-ear-right"></span>
+                <span class="bunny-face">
+                  <span class="bunny-eye bunny-eye-left"></span>
+                  <span class="bunny-eye bunny-eye-right"></span>
+                  <span class="bunny-nose"></span>
+                </span>
+              </div>
+              <div class="hero-egg hero-egg-blue"></div>
+              <div class="hero-egg hero-egg-yellow"></div>
+              <div class="hero-egg hero-egg-coral"></div>
+              <div class="hero-grass"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="instructions-screen" class="screen hidden" aria-hidden="true">
+          <div class="card instructions-card">
+            <div class="section-heading">
+              <p class="eyebrow">Learn in seconds</p>
+              <h2>How to Play</h2>
+            </div>
+
+            <div class="instruction-grid">
+              <article class="instruction-card">
+                <div class="instruction-icon">↔</div>
+                <h3>Move Fast</h3>
+                <p>Use keyboard arrows or the on-screen buttons to guide the bunny.</p>
+              </article>
+              <article class="instruction-card">
+                <div class="instruction-icon">🥚</div>
+                <h3>Catch Good Eggs</h3>
+                <p>Normal eggs are worth +1 and golden eggs give a +5 bonus.</p>
+              </article>
+              <article class="instruction-card">
+                <div class="instruction-icon">☠</div>
+                <h3>Dodge Hazards</h3>
+                <p>Rotten eggs and rocks cost one life each if they hit you.</p>
+              </article>
+              <article class="instruction-card">
+                <div class="instruction-icon">⏱</div>
+                <h3>Beat the Clock</h3>
+                <p>Each round lasts 60 seconds, so keep scoring before time runs out.</p>
+              </article>
+            </div>
+
+            <div class="legend-row" aria-label="Item values">
+              <div class="legend-pill legend-pill-good">Normal Egg +1</div>
+              <div class="legend-pill legend-pill-gold">Golden Egg +5</div>
+              <div class="legend-pill legend-pill-bad">Rotten Egg -1 life</div>
+              <div class="legend-pill legend-pill-rock">Rock -1 life</div>
+            </div>
+
+            <div class="instruction-summary">
+              <span>3 lives</span>
+              <span>60 seconds</span>
+              <span>Golden eggs are rare</span>
+            </div>
+
+            <div class="screen-actions">
+              <button id="start-from-instructions-btn" class="button button-primary">Start Game</button>
+              <button id="back-to-home-btn" class="button button-secondary">Back</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="countdown-screen" class="screen hidden" aria-hidden="true">
+          <div class="card countdown-card">
+            <p class="eyebrow">Get ready</p>
+            <div id="countdown-text" class="countdown-text">Ready?</div>
+            <p class="countdown-tip">Catch golden eggs for bonus points.</p>
+          </div>
+        </section>
+
+        <section id="game-screen" class="screen hidden" aria-hidden="true">
+          <div class="card game-card">
+            <div id="hud" class="hud">
+              <div class="hud-chip">
+                <span class="hud-label">Score</span>
+                <strong id="score-display">0</strong>
+              </div>
+              <div class="hud-chip hud-chip-timer">
+                <span class="hud-label">Time</span>
+                <strong id="timer-display">60s</strong>
+              </div>
+              <div class="hud-chip">
+                <span class="hud-label">Lives</span>
+                <strong id="lives-display" aria-label="3 lives remaining">❤️❤️❤️</strong>
+              </div>
+              <button id="pause-btn" class="button button-quiet" type="button">Pause</button>
+            </div>
+
+            <div id="game-area" class="game-area" aria-label="Bunny Egg Dash game area">
+              <div class="garden-horizon" aria-hidden="true"></div>
+              <div class="cloud cloud-one" aria-hidden="true"></div>
+              <div class="cloud cloud-two" aria-hidden="true"></div>
+              <div id="falling-items-layer" class="falling-items-layer"></div>
+              <div id="feedback-layer" class="feedback-layer" aria-live="polite"></div>
+              <div id="player-bunny" class="player-bunny" aria-label="Player bunny">
+                <span class="bunny-ear bunny-ear-left"></span>
+                <span class="bunny-ear bunny-ear-right"></span>
+                <span class="bunny-face">
+                  <span class="bunny-eye bunny-eye-left"></span>
+                  <span class="bunny-eye bunny-eye-right"></span>
+                  <span class="bunny-nose"></span>
+                </span>
+              </div>
+            </div>
+
+            <div id="mobile-controls" class="mobile-controls">
+              <button id="move-left-btn" class="button mobile-button" type="button" aria-label="Move left">
+                ◀ Move Left
+              </button>
+              <button id="move-right-btn" class="button mobile-button" type="button" aria-label="Move right">
+                Move Right ▶
+              </button>
+            </div>
+          </div>
+
+          <div id="pause-overlay" class="overlay hidden" aria-hidden="true">
+            <div class="overlay-card">
+              <p class="eyebrow">Take a breath</p>
+              <h2>Paused</h2>
+              <div class="screen-actions stacked-actions">
+                <button id="resume-btn" class="button button-primary">Resume</button>
+                <button id="restart-btn" class="button button-secondary">Restart</button>
+                <button id="pause-home-btn" class="button button-secondary">Home</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="results-screen" class="screen hidden" aria-hidden="true">
+          <div class="card results-card">
+            <p class="eyebrow">Round complete</p>
+            <h2 id="results-heading">Great Dash!</h2>
+
+            <div class="results-grid">
+              <div class="result-stat">
+                <span class="result-label">Final Score</span>
+                <strong id="final-score">0</strong>
+              </div>
+              <div class="result-stat">
+                <span class="result-label">Best Score</span>
+                <strong id="best-score">0</strong>
+              </div>
+            </div>
+
+            <div class="rank-badge">
+              <span class="result-label">Rank</span>
+              <strong id="rank-title">Little Hopper</strong>
+            </div>
+            <p id="results-message" class="results-message">Nice try, little bunny!</p>
+
+            <div class="screen-actions">
+              <button id="play-again-btn" class="button button-primary">Play Again</button>
+              <button id="results-home-btn" class="button button-secondary">Home</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
