@@ -761,6 +761,25 @@ h3 {
   font-size: 1.45rem;
 }
 
+#instructions-screen .section-heading .eyebrow {
+  color: #ff7d67 !important;
+}
+
+#instructions-screen .section-heading h2 {
+  color: #8e3e65 !important;
+}
+
+#instructions-screen .instruction-card h3 {
+  color: #b54843 !important;
+}
+
+#instructions-screen .instruction-card p,
+#instructions-screen .instruction-summary,
+#instructions-screen .instruction-summary span,
+#instructions-screen .button {
+  color: #111 !important;
+}
+
 .legend-row,
 .instruction-summary {
   display: flex;
