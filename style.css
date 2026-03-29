@@ -455,6 +455,59 @@ h3 {
   border-radius: 48% 48% 40% 40%;
 }
 
+.hero-bunny-arm {
+  position: absolute;
+  top: 18px;
+  width: 30px;
+  height: 82px;
+  border-radius: 18px 18px 16px 16px;
+  background: linear-gradient(180deg, #fffdf6, #ffe8dd);
+  border: 3px solid rgba(255, 255, 255, 0.92);
+  box-shadow: 0 12px 20px rgba(46, 36, 64, 0.08);
+}
+
+.hero-bunny-arm-left {
+  left: -16px;
+  transform: rotate(20deg);
+}
+
+.hero-bunny-arm-right {
+  right: -16px;
+  transform: rotate(-20deg);
+}
+
+.hero-bunny-hand {
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 28px;
+  height: 28px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: linear-gradient(180deg, #fffdf8, #ffe6dc);
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 16px rgba(46, 36, 64, 0.08);
+}
+
+.hero-bunny-hand::before,
+.hero-bunny-hand::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  width: 6px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 180, 195, 0.72);
+}
+
+.hero-bunny-hand::before {
+  left: 6px;
+}
+
+.hero-bunny-hand::after {
+  right: 6px;
+}
+
 .player-bunny {
   width: 110px;
   height: 110px;
@@ -641,8 +694,8 @@ h3 {
 }
 
 .hero-egg-coral {
-  bottom: 188px;
-  right: 146px;
+  bottom: 146px;
+  left: 22px;
   background: linear-gradient(180deg, #ffd6d0, #ff9f88);
   animation: floaty 4.9s ease-in-out infinite -0.6s;
 }
