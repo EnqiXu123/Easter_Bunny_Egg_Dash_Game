@@ -1359,6 +1359,51 @@ h3 {
     min-height: 340px;
   }
 
+  .hero-visual::before {
+    width: 108px;
+    height: 108px;
+    top: 22px;
+    right: 28px;
+  }
+
+  .hero-bunny {
+    width: 170px;
+    height: 214px;
+    bottom: 12px;
+  }
+
+  .hero-bunny-shadow {
+    bottom: 22px;
+    width: 112px;
+  }
+
+  .hero-bunny-head {
+    width: 106px;
+    height: 100px;
+    top: 20px;
+  }
+
+  .hero-bunny-body {
+    width: 124px;
+    height: 112px;
+    bottom: 32px;
+  }
+
+  .hero-egg-blue {
+    top: 74px;
+    left: 28px;
+  }
+
+  .hero-egg-yellow {
+    top: 188px;
+    right: 20px;
+  }
+
+  .hero-egg-coral {
+    bottom: 118px;
+    left: 10px;
+  }
+
   .instruction-grid,
   .results-grid {
     grid-template-columns: 1fr;
@@ -1389,6 +1434,140 @@ h3 {
 
   .mobile-controls {
     display: flex;
+  }
+
+  .hero-card {
+    gap: 18px;
+  }
+
+  .hero-visual {
+    min-height: 320px;
+  }
+
+  .hero-visual::before {
+    width: 90px;
+    height: 90px;
+    top: 18px;
+    right: 18px;
+  }
+
+  .hero-visual::after {
+    width: 180px;
+    height: 180px;
+    top: -42px;
+    left: -24px;
+  }
+
+  .hero-bunny {
+    width: 148px;
+    height: 188px;
+    bottom: 10px;
+  }
+
+  .hero-bunny-shadow {
+    bottom: 18px;
+    width: 96px;
+    height: 24px;
+  }
+
+  .hero-bunny-head {
+    width: 92px;
+    height: 88px;
+    top: 18px;
+  }
+
+  .hero-bunny-body {
+    width: 106px;
+    height: 96px;
+    bottom: 28px;
+  }
+
+  .hero-bunny-arm {
+    width: 24px;
+    height: 68px;
+    top: 14px;
+  }
+
+  .hero-bunny-arm-left {
+    left: -12px;
+  }
+
+  .hero-bunny-arm-right {
+    right: -12px;
+  }
+
+  .hero-bunny-hand {
+    width: 22px;
+    height: 22px;
+    bottom: -6px;
+  }
+
+  .hero-bunny-paw {
+    width: 26px;
+    height: 46px;
+    bottom: -24px;
+  }
+
+  .hero-bunny-paw-left {
+    left: 20px;
+  }
+
+  .hero-bunny-paw-right {
+    right: 20px;
+  }
+
+  .bunny-ear {
+    width: 26px;
+    height: 58px;
+    top: -38px;
+  }
+
+  .bunny-ear-left {
+    left: 12px;
+  }
+
+  .bunny-ear-right {
+    right: 12px;
+  }
+
+  .bunny-eye {
+    top: 34px;
+  }
+
+  .bunny-eye-left {
+    left: 24px;
+  }
+
+  .bunny-eye-right {
+    right: 24px;
+  }
+
+  .bunny-nose {
+    top: 48px;
+  }
+
+  .hero-bunny-mouth {
+    top: 60px;
+  }
+
+  .hero-egg {
+    width: 56px;
+    height: 72px;
+  }
+
+  .hero-egg-blue {
+    top: 92px;
+    left: 18px;
+  }
+
+  .hero-egg-yellow {
+    top: 176px;
+    right: 12px;
+  }
+
+  .hero-egg-coral {
+    bottom: 110px;
+    left: 8px;
   }
 }
 
@@ -1422,6 +1601,102 @@ h3 {
 
   .game-area {
     min-height: 360px;
+  }
+
+  .hero-visual {
+    min-height: 286px;
+  }
+
+  .hero-visual::before {
+    width: 76px;
+    height: 76px;
+    top: 16px;
+    right: 14px;
+  }
+
+  .hero-bunny {
+    width: 128px;
+    height: 168px;
+    bottom: 8px;
+  }
+
+  .hero-bunny-shadow {
+    bottom: 14px;
+    width: 84px;
+    height: 20px;
+  }
+
+  .hero-bunny-head {
+    width: 82px;
+    height: 78px;
+    top: 16px;
+  }
+
+  .hero-bunny-body {
+    width: 96px;
+    height: 88px;
+    bottom: 24px;
+  }
+
+  .hero-bunny-arm {
+    width: 22px;
+    height: 60px;
+    top: 12px;
+  }
+
+  .hero-bunny-paw {
+    width: 24px;
+    height: 40px;
+    bottom: -20px;
+  }
+
+  .bunny-ear {
+    width: 22px;
+    height: 50px;
+    top: -34px;
+  }
+
+  .bunny-eye {
+    width: 8px;
+    height: 12px;
+    top: 30px;
+  }
+
+  .bunny-eye-left {
+    left: 22px;
+  }
+
+  .bunny-eye-right {
+    right: 22px;
+  }
+
+  .bunny-nose {
+    width: 16px;
+    top: 44px;
+  }
+
+  .hero-bunny-mouth {
+    top: 54px;
+  }
+
+  .hero-egg {
+    width: 48px;
+    height: 62px;
+  }
+
+  .hero-egg-blue {
+    top: 98px;
+    left: 12px;
+  }
+
+  .hero-egg-yellow {
+    top: 170px;
+    right: 8px;
+  }
+
+  .hero-egg-coral {
+    bottom: 96px;
+    left: 6px;
   }
 }
 
