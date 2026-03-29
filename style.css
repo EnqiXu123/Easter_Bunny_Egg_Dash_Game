@@ -775,7 +775,7 @@ h3 {
 }
 
 #instructions-screen .section-heading .eyebrow {
-  color: #111 !important;
+  color: var(--coral) !important;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.1rem;
   font-weight: 900;
@@ -785,7 +785,7 @@ h3 {
   opacity: 1 !important;
   filter: none !important;
   mix-blend-mode: normal !important;
-  -webkit-text-fill-color: #111 !important;
+  -webkit-text-fill-color: var(--coral) !important;
 }
 
 #instructions-screen .section-heading h2 {
