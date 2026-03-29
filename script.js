@@ -801,6 +801,9 @@ function bindHoldButton(button, direction) {
   button.addEventListener("pointerup", stop);
   button.addEventListener("pointerleave", stop);
   button.addEventListener("pointercancel", stop);
+  button.addEventListener("dblclick", (event) => {
+    event.preventDefault();
+  });
 }
 
 function handleResize() {
