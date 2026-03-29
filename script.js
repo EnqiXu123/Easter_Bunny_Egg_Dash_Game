@@ -7,9 +7,12 @@ const GAME_CONFIG = {
   playerMarginBottom: 24,
   initialSpawnIntervalMs: 850,
   minimumSpawnIntervalMs: 430,
-  initialFallSpeed: 175,
-  maxFallSpeed: 360,
   difficultyRampSeconds: [20, 40],
+  fallSpeedStages: {
+    early: [180, 235],
+    mid: [270, 350],
+    late: [390, 500],
+  },
   itemWidth: 44,
   itemHeight: 58,
   storageKeys: {
@@ -228,8 +231,16 @@ function getDifficultyProgress() {
   return Math.min(Math.max(elapsedSeconds / maxElapsed, 0), 1);
 }
 
+function getElapsedSeconds() {
+  return GAME_CONFIG.roundDurationSeconds - gameState.timerRemaining;
+}
+
+function interpolateValue(start, end, progress) {
+  return start + (end - start) * progress;
+}
+
 function getCurrentStageIndex() {
-  const elapsedSeconds = GAME_CONFIG.roundDurationSeconds - gameState.timerRemaining;
+  const elapsedSeconds = getElapsedSeconds();
   if (elapsedSeconds >= GAME_CONFIG.difficultyRampSeconds[1]) {
     return 2;
   }
@@ -248,10 +259,22 @@ function getSpawnIntervalMs() {
 }
 
 function getFallSpeed() {
-  const progress = getDifficultyProgress();
-  return Math.min(
-    GAME_CONFIG.maxFallSpeed,
-    GAME_CONFIG.initialFallSpeed + progress * 185,
+  const elapsedSeconds = getElapsedSeconds();
+  const [midStart, lateStart] = GAME_CONFIG.difficultyRampSeconds;
+  const { early, mid, late } = GAME_CONFIG.fallSpeedStages;
+
+  if (elapsedSeconds < midStart) {
+    return interpolateValue(early[0], early[1], elapsedSeconds / midStart);
+  }
+
+  if (elapsedSeconds < lateStart) {
+    return interpolateValue(mid[0], mid[1], (elapsedSeconds - midStart) / (lateStart - midStart));
+  }
+
+  return interpolateValue(
+    late[0],
+    late[1],
+    (elapsedSeconds - lateStart) / (GAME_CONFIG.roundDurationSeconds - lateStart),
   );
 }
 
