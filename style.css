@@ -717,6 +717,8 @@ h3 {
     radial-gradient(circle at 82% 14%, rgba(255, 210, 79, 0.34), transparent 16%),
     radial-gradient(circle at 72% 68%, rgba(194, 241, 255, 0.42), transparent 18%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0));
+  opacity: 0.72;
+  z-index: 0;
 }
 
 .instruction-grid {
@@ -725,12 +727,23 @@ h3 {
   gap: 16px;
 }
 
+#instructions-screen .section-heading,
+#instructions-screen .instruction-grid,
+#instructions-screen .legend-row,
+#instructions-screen .instruction-summary,
+#instructions-screen .screen-actions {
+  position: relative;
+  z-index: 1;
+}
+
 #instructions-screen .instruction-card {
   padding: 22px;
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.92);
   box-shadow: 0 16px 30px rgba(46, 36, 64, 0.08);
+  position: relative;
+  z-index: 1;
 }
 
 #instructions-screen .instruction-card:nth-child(1) {
@@ -762,15 +775,39 @@ h3 {
 }
 
 #instructions-screen .section-heading .eyebrow {
-  color: #ff7d67 !important;
+  color: #111 !important;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: normal;
+  text-transform: none;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  -webkit-text-fill-color: #111 !important;
 }
 
 #instructions-screen .section-heading h2 {
-  color: #8e3e65 !important;
+  color: #111 !important;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 900;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  -webkit-text-fill-color: #111 !important;
 }
 
 #instructions-screen .instruction-card h3 {
-  color: #b54843 !important;
+  color: #111 !important;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 900;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  -webkit-text-fill-color: #111 !important;
 }
 
 #instructions-screen .instruction-card p,
