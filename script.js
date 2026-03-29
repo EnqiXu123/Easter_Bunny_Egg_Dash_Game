@@ -80,6 +80,7 @@ const elements = {
     game: document.getElementById("game-screen"),
     results: document.getElementById("results-screen"),
   },
+  backgroundMusic: document.getElementById("background-music"),
   homeBestScore: document.getElementById("home-best-score"),
   soundToggleBtn: document.getElementById("sound-toggle-btn"),
   soundToggleLabel: document.getElementById("sound-toggle-label"),
@@ -146,6 +147,29 @@ let countdownIntervalId = 0;
 let countdownTimeoutId = 0;
 let itemIdCounter = 0;
 
+function configureBackgroundMusic() {
+  elements.backgroundMusic.volume = 0.45;
+  elements.backgroundMusic.loop = true;
+}
+
+function pauseBackgroundMusic() {
+  elements.backgroundMusic.pause();
+}
+
+function attemptBackgroundMusicPlayback() {
+  if (!gameState.soundEnabled) {
+    pauseBackgroundMusic();
+    return;
+  }
+
+  const playPromise = elements.backgroundMusic.play();
+  if (playPromise && typeof playPromise.catch === "function") {
+    playPromise.catch(() => {
+      // Ignore autoplay rejections until the user interacts again.
+    });
+  }
+}
+
 function safeLocalStorageGet(key, fallback) {
   try {
     const value = window.localStorage.getItem(key);
@@ -183,6 +207,14 @@ function updateBestScoreDisplays() {
 function updateSoundToggleUI() {
   elements.soundToggleLabel.textContent = gameState.soundEnabled ? "On" : "Off";
   elements.soundToggleBtn.setAttribute("aria-pressed", String(gameState.soundEnabled));
+}
+
+function syncBackgroundMusic() {
+  if (gameState.soundEnabled) {
+    attemptBackgroundMusicPlayback();
+  } else {
+    pauseBackgroundMusic();
+  }
 }
 
 function setScreen(screenName) {
@@ -697,10 +729,15 @@ function toggleSoundPreference() {
   gameState.soundEnabled = !gameState.soundEnabled;
   safeLocalStorageSet(GAME_CONFIG.storageKeys.soundEnabled, String(gameState.soundEnabled));
   updateSoundToggleUI();
+  syncBackgroundMusic();
 }
 
 function handleKeyChange(event, isPressed) {
   const key = event.key.toLowerCase();
+
+  if (isPressed) {
+    attemptBackgroundMusicPlayback();
+  }
 
   if (key === "escape" && isPressed && gameState.currentScreen === "game") {
     if (gameState.isPaused) {
@@ -752,6 +789,7 @@ function updateMobileButtons() {
 function bindHoldButton(button, direction) {
   const start = (event) => {
     event.preventDefault();
+    attemptBackgroundMusicPlayback();
     setMobileDirection(direction, true);
   };
   const stop = (event) => {
@@ -784,18 +822,48 @@ function handleResize() {
 }
 
 function bindEvents() {
-  elements.playBtn.addEventListener("click", beginCountdown);
-  elements.howToPlayBtn.addEventListener("click", () => setScreen("instructions"));
-  elements.startFromInstructionsBtn.addEventListener("click", beginCountdown);
-  elements.backToHomeBtn.addEventListener("click", () => setScreen("home"));
+  elements.playBtn.addEventListener("click", () => {
+    attemptBackgroundMusicPlayback();
+    beginCountdown();
+  });
+  elements.howToPlayBtn.addEventListener("click", () => {
+    attemptBackgroundMusicPlayback();
+    setScreen("instructions");
+  });
+  elements.startFromInstructionsBtn.addEventListener("click", () => {
+    attemptBackgroundMusicPlayback();
+    beginCountdown();
+  });
+  elements.backToHomeBtn.addEventListener("click", () => {
+    attemptBackgroundMusicPlayback();
+    setScreen("home");
+  });
   elements.soundToggleBtn.addEventListener("click", toggleSoundPreference);
 
-  elements.pauseBtn.addEventListener("click", pauseGame);
-  elements.resumeBtn.addEventListener("click", resumeGame);
-  elements.restartBtn.addEventListener("click", beginCountdown);
-  elements.pauseHomeBtn.addEventListener("click", goHome);
-  elements.playAgainBtn.addEventListener("click", beginCountdown);
-  elements.resultsHomeBtn.addEventListener("click", goHome);
+  elements.pauseBtn.addEventListener("click", () => {
+    attemptBackgroundMusicPlayback();
+    pauseGame();
+  });
+  elements.resumeBtn.addEventListener("click", () => {
+    attemptBackgroundMusicPlayback();
+    resumeGame();
+  });
+  elements.restartBtn.addEventListener("click", () => {
+    attemptBackgroundMusicPlayback();
+    beginCountdown();
+  });
+  elements.pauseHomeBtn.addEventListener("click", () => {
+    attemptBackgroundMusicPlayback();
+    goHome();
+  });
+  elements.playAgainBtn.addEventListener("click", () => {
+    attemptBackgroundMusicPlayback();
+    beginCountdown();
+  });
+  elements.resultsHomeBtn.addEventListener("click", () => {
+    attemptBackgroundMusicPlayback();
+    goHome();
+  });
 
   window.addEventListener("keydown", (event) => handleKeyChange(event, true));
   window.addEventListener("keyup", (event) => handleKeyChange(event, false));
@@ -813,8 +881,10 @@ function bindEvents() {
 
 function initialize() {
   loadPreferences();
+  configureBackgroundMusic();
   updateBestScoreDisplays();
   updateSoundToggleUI();
+  syncBackgroundMusic();
   updateHud();
   resetPlayerPosition();
   bindEvents();
